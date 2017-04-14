@@ -1,0 +1,53 @@
+#!/bin/bash -
+#title          :conf
+#description    :Conf file for domotz kiosk mode installer
+#author         :Cody Bunch
+#date           :04/13/2017
+#version        :
+#usage          :. conf
+#notes          :Provides configuration optionns for installing a domotz kiosk
+#============================================================================
+
+# The following section should be all you need to edit to get this working.
+# The values here can all be specified on the command line too, should you
+# Not want to store passwords in config files.
+
+
+#
+# Mandatory parameters
+#
+export SSID=${SSID:="ssid_here"}
+export WIFI_PASS=${WIFI_PASS:="letm31n"}
+export UNIFI_URL=${UNIFI_URL:="https://localhost:8443/manage/site/default/dashboard"}
+
+#============================================================================
+# Do not edit beyond here
+#============================================================================
+
+
+#
+# Enable debugging
+# Possible values:
+# log = log all console output to $LOGFILE
+# debug = set -e -u -x and log all output to $LOGFILE
+# anything else disables logging.
+#
+export DBG=${DBG:-fase}
+export LOGFILE=${LOGFILE:-${HOME}/install.log}
+export UPGRADE=true
+
+
+#
+# List of packages to install via apt-get
+#
+export APT_PACKAGES=(
+    screen
+    tmux
+    mosh
+    bmon
+    htop
+    traceroute
+    ssh-copy-id
+    tree
+    iptables
+)
