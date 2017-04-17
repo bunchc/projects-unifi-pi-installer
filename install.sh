@@ -30,7 +30,7 @@ main() {
     if ! [[ -f /etc/init.d/install_kiosk ]]; then {
         e_header "Beginning Installation"
         first_run
-        install_utilities "${APT_PACKAGES[@]}" "true"
+        install_utilities "${APT_PACKAGES[@]}" true
         install_unifi
         configure_wifi "${SSID}" "${WIFI_PASS}"
         install_screen_before_reboot
