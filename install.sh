@@ -27,13 +27,16 @@ for file in $functions; do {
 # Performs the install
 #
 main() {
+    e_header "Beginning Installation"
     if ! [[ -f /etc/init.d/install_kiosk ]]; then {
-        e_header "Beginning Installation"
+        e_arrow "First run starting..."
         first_run
         install_utilities true "${APT_PACKAGES[@]}"
-        install_unifi
-        configure_wifi "${SSID}" "${WIFI_PASS}"
+        if ! [[ ${KIOSK_ONLY} = "true" ]]; then {
+            install_unifi
+        } fi
         install_screen_before_reboot
+        configure_wifi "${SSID}" "${WIFI_PASS}"
         e_arrow "Rebooting to complete installation"
         do_reboot
     } else {
