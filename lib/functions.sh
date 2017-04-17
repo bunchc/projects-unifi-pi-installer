@@ -120,7 +120,7 @@ clean_up() {
 #
 function install_utilities() {
     local param=$1; shift
-    local upgrade=$2; shift
+    local upgrade=$1; shift
     e_arrow "${FUNCNAME[0]}"
 
     export DEBIAN_FRONTEND=noninteractive
