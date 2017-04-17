@@ -51,18 +51,18 @@ main() {
 #
 case "$DBG" in
     debug )
-        log "Debugging enabled. Logging to $LOGFILE" -c "red" -b -u
-        log "Starting bootstrap" -c "blue"
+        e_arrow "Debugging enabled. Logging to $LOGFILE"
+        e_arrow "Starting bootstrap"
         set -e -u -x
         time { main "$@"; } 2>&1 | tee -a "$LOGFILE"
         ;;
     log )
-        log "Logging output to $LOGFILE" -c "yellow" -u
-        log "Starting bootstrap" -c "blue"
+        e_arrow "Logging output to $LOGFILE"
+        e_arrow "Starting bootstrap"
         time { main "$@"; } 2>&1 | tee -a "$LOGFILE"
         ;;
     * )
-        log "Starting bootstrap" -c "blue"
+        e_arrow "Starting bootstrap"
         main "$@"
         ;;
 esac

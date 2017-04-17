@@ -20,6 +20,12 @@ export SSID=${SSID:="ssid_here"}
 export WIFI_PASS=${WIFI_PASS:="letm31n"}
 export UNIFI_URL=${UNIFI_URL:="https://localhost:8443/manage/site/default/dashboard"}
 
+#
+# Set the screen size
+# Options are: 35r (for the adafruit 3.5" TFT)
+#
+export SCREEN_SIZE=${SCREEN_SIZE:="35r"}
+
 #============================================================================
 # Do not edit beyond here
 #============================================================================
