@@ -25,7 +25,7 @@ function e_arrow()    { echo -e " \033[1;34m➜\033[0m  $@"; }
 first_run() {
     e_arrow "${FUNCNAME[0]}"
     if ! [[ -f /etc/init.d/install_kiosk ]]; then {
-echo "#! /bin/sh
+echo '#! /bin/sh
 
 ### BEGIN INIT INFO
 # Provides:          myupdate
@@ -39,7 +39,7 @@ case "$1" in
         ;;
     stop|restart|reload)
         ;;
-esac" | sudo tee -a /etc/init.d/install_kiosk
+esac' | sudo tee -a /etc/init.d/install_kiosk
         sudo update-rc.d myupdate defaults
     } fi
 }
