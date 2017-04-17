@@ -119,10 +119,10 @@ clean_up() {
 # @return
 #
 function install_utilities() {
-    local param=$1; shift
-    local upgrade=$1; shift
     e_arrow "${FUNCNAME[0]}"
+    local upgrade=$1; shift
 
+    e_arrow "Update apt"
     export DEBIAN_FRONTEND=noninteractive
     sudo apt-get update -qq
 
@@ -135,6 +135,7 @@ function install_utilities() {
     } fi
 
     e_arrow "Installing packages"
+    local param=("$@")
     sudo DEBIAN_FRONTEND=noninteractive apt-get -y \
         -o Dpkg::Options::="--force-confdef" \
         -o Dpkg::Options::="--force-confold" \
