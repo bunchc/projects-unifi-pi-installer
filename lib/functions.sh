@@ -69,7 +69,7 @@ function install_unifi() {
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 06E85760C0A52C50
 
     e_arrow "Installing UniFi"
-    install_utilities "${ubnt[@]}"
+    install_utilities false "${ubnt[@]}"
 
     e_arrow "Disabling redundant Mongo"
     echo 'ENABLE_MONGODB=no' \
@@ -174,8 +174,8 @@ do_reboot() {
 # @return
 #
 function install_screen_after_reboot() {
-    local param=$1; shift
     e_arrow "${FUNCNAME[0]}"
+    local param=$1; shift
     if ! sudo adafruit-pitft-helper -t "${param}" -u /home/hypriot; then {
         e_error "Unable to install screen"
     } fi
@@ -190,7 +190,7 @@ function install_screen_after_reboot() {
 function configure_wifi() {
     e_arrow "${FUNCNAME[0]}"
     local ssid=$1; shift
-    local wifi_pass=$2; shift
+    local wifi_pass=$1; shift
 
 echo "
 network={
