@@ -133,21 +133,19 @@ function install_utilities() {
     sudo apt-get update -qq
 
     if $upgrade; then {
+        e_arrow "apt-get upgrade"
         sudo DEBIAN_FRONTEND=noninteractive apt-get -y \
             -o Dpkg::Options::="--force-confdef" \
             -o Dpkg::Options::="--force-confold" \
             upgrade
     } fi
 
-    if [[ "$(declare -p param)" =~ "decclare -a" ]]; then {
-        sudo DEBIAN_FRONTEND=noninteractive apt-get -y \
-            -o Dpkg::Options::="--force-confdef" \
-            -o Dpkg::Options::="--force-confold" \
-            install "${param[@]}"
-        sudo apt-get clean
-    } else {
-        e_error "$param is not an array."
-    } fi
+    e_arrow "Installing packages"
+    sudo DEBIAN_FRONTEND=noninteractive apt-get -y \
+        -o Dpkg::Options::="--force-confdef" \
+        -o Dpkg::Options::="--force-confold" \
+        install "${param[@]}"
+    sudo apt-get clean
 }
 
 
