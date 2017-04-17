@@ -29,6 +29,14 @@ echo '#! /bin/sh
 
 ### BEGIN INIT INFO
 # Provides:          install_kiosk
+# Required-Start:
+# Should-Start:
+# Should-Stop:
+# Required-Stop:
+# Default-Start:
+# Default-Stop:
+# Short-Description:
+# Description:
 ### END INIT INFO
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
