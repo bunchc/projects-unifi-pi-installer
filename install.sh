@@ -27,7 +27,7 @@ for file in $functions; do {
 # Performs the install
 #
 main() {
-    if [[ -f /etc/init.d/install_kiosk ]]; then {
+    if ! [[ -f /etc/init.d/install_kiosk ]]; then {
         e_header "Beginning Installation"
         first_run
         install_utilities "${APT_PACKAGES[@]}" true || e_error "Failed to install utilities"; exit 99
