@@ -65,7 +65,7 @@ function install_unifi() {
 
     e_arrow "Adding ubnt apt repo"
     echo "deb http://www.ubnt.com/downloads/unifi/debian unifi5 ubiquiti" \
-        | sudo tee -a /etc/apt/sources.list.d/100-ubnt.list \
+        | sudo tee -a /etc/apt/sources.list.d/100-ubnt.list
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 06E85760C0A52C50
 
     e_arrow "Installing UniFi"
