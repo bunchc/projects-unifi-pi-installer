@@ -28,7 +28,7 @@ first_run() {
 echo '#! /bin/sh
 
 ### BEGIN INIT INFO
-# Provides:          myupdate
+# Provides:          install_kiosk
 ### END INIT INFO
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
@@ -40,7 +40,8 @@ case "$1" in
     stop|restart|reload)
         ;;
 esac' | sudo tee -a /etc/init.d/install_kiosk
-        sudo update-rc.d myupdate defaults
+        sudo update-rc.d install_kiosk defaults \
+            || e_error "Unable to install reboot service"; exit 99
     } fi
 }
 
@@ -56,14 +57,15 @@ function install_unifi() {
 
     e_arrow "Adding ubnt apt repo"
     echo "deb http://www.ubnt.com/downloads/unifi/debian unifi5 ubiquiti" \
-        | sudo tee -a /etc/apt/sources.list.d/100-ubnt.list
+        | sudo tee -a /etc/apt/sources.list.d/100-ubnt.list \
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 06E85760C0A52C50
 
     e_arrow "Installing UniFi"
     install_utilities "${ubnt[@]}"
 
     e_arrow "Disabling redundant Mongo"
-    echo 'ENABLE_MONGODB=no' | sudo tee -a /etc/mongodb.conf > /dev/null
+    echo 'ENABLE_MONGODB=no' \
+        | sudo tee -a /etc/mongodb.conf > /dev/null
 
     e_arrow "Installing better snappy-java"
     cd /usr/lib/unifi/lib || exit
@@ -82,11 +84,11 @@ clean_up() {
     e_arrow "${FUNCNAME[0]}"
 
     e_arrow "Stopping installer service"
-    sudo service myupdate stop \
+    sudo service install_kiosk stop \
         || e_error "Failed to stop service"; exit 99
 
     e_arrow "Removing installer service"
-    sudo update-rc.d myupdate remove \
+    sudo update-rc.d install_kiosk remove \
         || e_error "Failed to remove service"; exit 99
 
     sudo rm -f /etc/init.d/install_kiosk \
