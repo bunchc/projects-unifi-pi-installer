@@ -40,6 +40,7 @@ case "$1" in
     stop|restart|reload)
         ;;
 esac' | sudo tee -a /etc/init.d/install_kiosk
+        sudo chmod +x /etc/init.d/install_kiosk
         sudo update-rc.d install_kiosk defaults \
             || e_error "Unable to install reboot service"; exit 99
     } fi
