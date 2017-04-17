@@ -151,8 +151,12 @@ function install_utilities() {
 #
 function install_screen_before_reboot() {
     e_arrow "${FUNCNAME[0]}"
+
     curl -SLs https://apt.adafruit.com/add-pin | sudo bash
-    sudo apt-get install -y raspberrypi-bootloader adafruit-pitft-helper raspberrypi-kernel
+    sudo apt-get install -y --force-yes \
+        raspberrypi-bootloader \
+        adafruit-pitft-helper \
+        raspberrypi-kernel
 }
 
 
