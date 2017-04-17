@@ -30,16 +30,16 @@ main() {
     if ! [[ -f /etc/init.d/install_kiosk ]]; then {
         e_header "Beginning Installation"
         first_run
-        install_utilities "${APT_PACKAGES[@]}" true || e_error "Failed to install utilities"; exit 99
-        install_unifi || e_error "Failed to install UniFi"; exit 99
-        configure_wifi "${SSID}" "${WIFI_PASS}" || e_error "Failed to configure wifi"; exit 99
-        install_screen_before_reboot || e_error "Failed to install screen"; exit 99
+        install_utilities "${APT_PACKAGES[@]}" "true"
+        install_unifi
+        configure_wifi "${SSID}" "${WIFI_PASS}"
+        install_screen_before_reboot
         e_arrow "Rebooting to complete installation"
         do_reboot
     } else {
-        install_screen_after_reboot "${SCREEN_SIZE}" || e_error "Failed to install screen"; exit 99
-        settup_kiosk "${UNIFI_URL}" || e_error "Unable to install domotz kiosk"; exit 99
-        clean_up || e_error "Cleanup failed"; exit 99
+        install_screen_after_reboot "${SCREEN_SIZE}"
+        settup_kiosk "${UNIFI_URL}"
+        clean_up
         e_success "Installation complete, rebooting into kiosk mode"
         do_reboot
     } fi

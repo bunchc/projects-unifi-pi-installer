@@ -92,15 +92,11 @@ clean_up() {
     e_arrow "${FUNCNAME[0]}"
 
     e_arrow "Stopping installer service"
-    sudo service install_kiosk stop \
-        || e_error "Failed to stop service"; exit 99
+    sudo service install_kiosk stop
 
     e_arrow "Removing installer service"
-    sudo update-rc.d install_kiosk remove \
-        || e_error "Failed to remove service"; exit 99
-
-    sudo rm -f /etc/init.d/install_kiosk \
-        || e_error "Failed to remove script"; exit 99
+    sudo update-rc.d install_kiosk remove
+    sudo rm -f /etc/init.d/install_kiosk
 
     e_arrow "Cleaning up apt packages"
     sudo apt-get -y remove dkms
@@ -108,12 +104,10 @@ clean_up() {
     sudo apt-get -y clean
 
     e_arrow "Cleanup temp files"
-    sudo rm -rf /tmp/* \
-        || e_error "Failed to remove temp files"; exit 99
+    sudo rm -rf /tmp/*
 
     e_arrow "Zero out freespace"
-    dd if=/dev/zero of=/EMPTY bs=1M \
-        || e_error "Failed to zero free space"; exit 99
+    dd if=/dev/zero of=/EMPTY bs=1M
     rm -f /EMPTY
 }
 
